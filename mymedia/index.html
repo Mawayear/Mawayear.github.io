@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Daily_Thoughts & Storie</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="profile-card">
+    <div class="hero">
+        <div class="avatar" id="avatarContainer">
+            <img id="profileImage" src="" alt="Profile" style="display: none;">
+            <i id="defaultIcon" class="fas fa-feather-alt"></i>
+        </div>
+        <h1>Daily_Thoughts & Storie</h1>
+        <div class="tagline">✨ Thoughts and story of the day 📌📌</div>
+        <div class="stats-row">
+            <span><i class="fas fa-users"></i> 5K</span>
+            <span id="visitorCount"><i class="fas fa-eye"></i> 0</span>
+            <span id="storyCount"><i class="fas fa-comment"></i> 0</span>
+        </div>
+    </div>
+
+    <div class="info-panel">
+        <!-- SOCIAL ICONS WITH USERNAMES - TWO ON EACH SIDE -->
+        <div class="social-icons-wrapper">
+            <div class="social-left-icons">
+                <a href="#" class="social-item" id="instagramIcon" data-platform="instagram">
+                    <div class="social-icon-circle">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="social-username">
+                        <span class="platform-name">Instagram</span>
+                        <span class="username">@daily_thoughts__storie</span>
+                    </div>
+                </a>
+                <a href="#" class="social-item" id="facebookProfileIcon" data-platform="facebook">
+                    <div class="social-icon-circle">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="social-username">
+                        <span class="platform-name">Facebook Profile</span>
+                        <span class="username">Mac Macable</span>
+                    </div>
+                </a>
+            </div>
+            <div class="social-right-icons">
+                <a href="#" class="social-item" id="facebookPageIcon" data-platform="facebook">
+                    <div class="social-icon-circle">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="social-username">
+                        <span class="platform-name">Facebook Page</span>
+                        <span class="username">Daily_Thoughts</span>
+                    </div>
+                </a>
+                <a href="#" class="social-item" id="tiktokIcon" data-platform="tiktok">
+                    <div class="social-icon-circle">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="social-username">
+                        <span class="platform-name">TikTok</span>
+                        <span class="username">@macable_002</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- COMMUNITY STORY INPUT -->
+        <div class="story-input-compact">
+            <input type="text" id="storyAuthor" placeholder="Your name (optional)" class="name-input">
+            <textarea id="storyContent" placeholder="Share your story of the day... 📌📌" rows="2" class="story-input"></textarea>
+            <button id="submitStory" class="share-btn">
+                <i class="fas fa-paper-plane"></i> Share
+            </button>
+        </div>
+
+        <!-- STORIES FEED -->
+        <div class="stories-feed">
+            <div id="storiesList" class="stories-list"></div>
+            <div id="emptyStories" class="empty-feed">No stories yet. Be the first! ✨</div>
+        </div>
+
+        <!-- QUICK CONTACT ROW -->
+        <div class="contact-row">
+            <div class="contact-item" id="whatsappContact">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+                <small>+254 758 558 755</small>
+            </div>
+            <div class="contact-item" id="phoneContact">
+                <i class="fas fa-phone-alt"></i>
+                <span>Call</span>
+                <small>+254 758 558 755</small>
+            </div>
+            <div class="contact-item" id="emailContact">
+                <i class="far fa-envelope"></i>
+                <span>Email</span>
+                <small>omarimawaya02@gmail.com</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-heart"></i> inspiring minds, one story at a time
+    </div>
+</div>
+
+<!-- Admin Panel (Hidden by default) -->
+<div id="adminPanel" class="admin-sidebar">
+    <div class="admin-header">
+        <i class="fas fa-chart-line"></i>
+        <h3>Analytics Dashboard</h3>
+        <button id="closeAdmin" class="close-admin">&times;</button>
+    </div>
+    <div class="admin-stats">
+        <div class="admin-stat">
+            <i class="fas fa-eye"></i>
+            <span id="totalVisitors">0</span>
+            <small>Visitors</small>
+        </div>
+        <div class="admin-stat">
+            <i class="fas fa-mouse-pointer"></i>
+            <span id="totalClicks">0</span>
+            <small>Clicks</small>
+        </div>
+        <div class="admin-stat">
+            <i class="fas fa-heart"></i>
+            <span id="totalLikes">0</span>
+            <small>Likes</small>
+        </div>
+    </div>
+    <canvas id="clicksChart" style="height: 150px;"></canvas>
+    <div class="visitor-list">
+        <h4><i class="fas fa-users"></i> Recent Visitors</h4>
+        <div id="visitorList"></div>
+    </div>
+    <div class="admin-actions">
+        <label for="avatarUpload" class="upload-admin-btn">
+            <i class="fas fa-camera"></i> Update Profile Picture
+        </label>
+        <input type="file" id="avatarUpload" accept="image/*" style="display:none">
+        <button id="clearAnalyticsBtn" class="clear-btn">
+            <i class="fas fa-trash"></i> Clear Data
+        </button>
+    </div>
+    <button id="logoutAdmin" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+</div>
+
+<div id="toast" class="toast">✨ Copied!</div>
+
+<script src="script.js"></script>
+</body>
+</html>
